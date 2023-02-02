@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useCallback, useState } from "react";
+import DemoOutput from "./Components/Demo/DemoOutput";
+import NavBar from "./Components/Navigation/NavBar";
 
-function App() {
+const App = (props) => {
+  const [showParagraph, setShowparagraph] = useState(false);
+  const [allowToggle, setAllowToggle] = useState(false);
+  console.log("APP RUNNING");
+  const toggleHandler = useCallback(() => {
+    if (allowToggle) {
+      setShowparagraph((prevParagraph) => !prevParagraph);
+    }
+  }, [allowToggle]);
+  const allowtoggleHandler = () => {
+    setAllowToggle(true);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavBar />
+      <div class="card">
+        <div class="card-body">
+          <h2>Hello there</h2>
+          <DemoOutput show={showParagraph} />
+          <button type="button" onClick={toggleHandler} class="btn btn-primary">
+            Toggle
+          </button>
+          <button
+            type="button"
+            onClick={allowtoggleHandler}
+            class="btn btn-primary"
+          >
+            Toggle
+          </button>
+        </div>
+      </div>
+    </>
   );
-}
+};
 
 export default App;
